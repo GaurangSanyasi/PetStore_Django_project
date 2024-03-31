@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Sr.no</th>
+                <th>PetName</th>
+                <th>Categort</th>
+                <th>Breed</th>
+                <th>Price</th>
+                <th>Discription</th>
+                <th>Image</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.pname}}</td>
+                <td>{{i.category}}</td>
+                <td>{{i.Breed}}</td>
+                <td>{{i.Price}}</td>
+                <td>{{i.desc}}</td>
+                <td><img src="{{i.image.url}}" width="100" /></td>
+                <td>
+                    <form action="{% url 'delete' i.id %}" method="post">
+                        {% csrf_token %}
+                        <input
+                            class="btn btn-danger"
+                            type="submit"
+                            value="delete"
+                        />
+                    </form>
+                    <a href="{% url 'update' i.id %}"><button class="btn-succes">Update</button></a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </body>
+</html>
